@@ -1,0 +1,18 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .wrapper {
+  
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  .title {
+    text-align: center;
+    font-size: 20px;
+    color:white;
+  }
+  
