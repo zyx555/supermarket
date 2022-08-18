@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import { Avatar, List, Button, message, Upload, Input, Divider, Skeleton } from 'antd';
+import { List, Button, Divider, Skeleton, Popconfirm, message } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Description from './Description'
 import HttpUtil from '../../../Util/httpUtil'
@@ -13,9 +13,9 @@ export default class index extends Component {
       total: 0,
     },
     data: [],
-    loading: false,
+    loading: true,
   }
-  componentDidMount() {
+ getCategories=()=> {
     const { pageSize, current } = this.state.pagination
     HttpUtil.getCategories({
       current,
@@ -27,21 +27,29 @@ export default class index extends Component {
       pagination.total = total
       this.setState({
         data: data,
+        loading: false,
         pagination
       })
-      console.log(data.length)
     })
+  }
+  componentDidMount(){
+    this.getCategories()
   }
   handleDelete = (id) => {
     const { data } = this.state
     const curTotal = data.length
-    HttpUtil.deleteCategory({
-      _id: id,
-      curTotal: curTotal
-    }).then((res) => {
-      console.log(res)
-    })
-
+    console.log(...data)
+    
+      HttpUtil.deleteCategory({
+        _id: id,
+        curTotal: curTotal
+      }).then(() => {
+        message.success('删除成功')
+        this.getCategories()
+      
+      })
+      
+    
   }
   loadMoreData = () => {
     const { current, pageSize } = this.state.pagination
@@ -70,6 +78,7 @@ export default class index extends Component {
         })
       });
   };
+
   render() {
     const { data } = this.state
     return (
@@ -88,19 +97,19 @@ export default class index extends Component {
             dataLength={data.length}
             next={this.loadMoreData}
             hasMore={data.length < 50}
-            loader={
-              <Skeleton
-                avatar
-                paragraph={{
-                  rows: 1,
-                }}
-              // active
-              />
-            }
-            endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
+            // loader={
+            //   <Skeleton
+            //     avatar
+            //     paragraph={{
+            //       rows: 1,
+            //     }}
+            //   />
+            // }
+            // endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
             scrollableTarget="scrollableDiv"
           >
             <List
+              loading={this.state.loading}
               itemLayout="horizontal"
               header={
                 <Link to='/home/categories/addcategory' > <Button type='primary' onClick={this.handleAdd} >新增分类</Button></Link>
@@ -113,7 +122,15 @@ export default class index extends Component {
                     title={`${data.categoryName}类`}
                     description={`共计${data.total}件商品`}
                   />
-                  <Button type="primary" danger key={this._id} onClick={this.handleDelete.bind(data, data._id)}>删除分类</Button>
+                  <Popconfirm
+                    title="确定删除该分类吗？"
+                    onConfirm={this.handleDelete.bind(data, data._id)}
+                    okText="确认"
+                    cancelText="取消"
+                  >
+                    <Button type="primary" danger key={this._id} >删除分类</Button>
+                  </Popconfirm>
+
                 </List.Item>)
               }
               pagination={false} />

@@ -15,4 +15,12 @@
     font-size: 20px;
     color:white;
   }
-  
+  .ant-col-sm-8 {
+    flex: 0 0 22.333333%;
+  }
+  .ant-col-sm-offset-8 {
+    margin-left: 23.333333%
+  }
+  #register{
+    margin-left: -7% ;
+  }

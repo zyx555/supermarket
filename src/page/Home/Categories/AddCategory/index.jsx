@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, message, PageHeader, Space } from 'antd';
 import HttpUtil from '../../../../Util/httpUtil'
+import Description from '../Description';
 
 export default class AddCategory extends Component {
   state = {
     curTotal: '5',
-    // category: ''
   }
-
-
   onFinish = (values) => {
     const { curTotal } = this.state
 
@@ -16,19 +14,31 @@ export default class AddCategory extends Component {
       categoryName: values.category,
       curTotal: curTotal
     }).then((res) => {
-      console.log(res)
-      // this.setState({
-      //   curTotal: curTotal
-      // })
+      message.success('商品分类新增成功')
+      window.location.href='/home/categories'
     }
+    ).catch(
+      message.error('该分类下还有商品')
     )
   }
   onFinishFailed = (err) => {
-console.log(err)
+    console.log(err)
+  }
+  goBack = () => {
+    window.location.href = '/home/categories'
   }
   render() {
     return (
       <>
+      <Description/>
+        <PageHeader
+          className="site-page-header"
+          onBack={() => {
+            this.goBack()
+          }}
+          subTitle="商品分类管理/新增分类"
+          style={{ paddingLeft: 10 }}
+        />
         <Form
           name="basic"
           labelCol={{ span: 8 }}
@@ -47,10 +57,12 @@ console.log(err)
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit">
-              确定
-            </Button>
-            <Button type='primary' danger >取消</Button>
+            <Space>
+              <Button type="primary" htmlType="submit">
+                确定
+              </Button>
+              <Button type='primary' danger >取消</Button>
+            </Space>
           </Form.Item>
         </Form>
       </>

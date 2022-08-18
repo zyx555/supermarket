@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Button, message, Upload, Form, Input } from 'antd';
+import { Button, message, Upload, Form, Input,PageHeader } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import HttpUtil from "../../../../Util/httpUtil";
+import Description from '../Description'
 
 
 const onFinish = (data) => {
@@ -18,8 +19,9 @@ const onFinish = (data) => {
     formData.append('adName', data.adName)
     formData.append('adCategory', data.adCategory)
     HttpUtil.addAd(formData).then((res) => {
-      message.success(res.message)
-      console.log(res)
+      message.success('新增广告成功')
+      window.location.href='/home/ad'
+      
     })
   } else {
     message.warning("输入内容不能为空")
@@ -33,9 +35,21 @@ export default class AddAds extends Component {
     file:'',
     adid:''
   }
+  goBack(){
+    window.location.href='/home/ad'
+  }
   render() {
     return (
       <>
+      <Description/>
+      <PageHeader
+          className="site-page-header"
+          onBack={() => {
+         this.goBack()
+          }}
+          subTitle="广告投放管理/新增广告"
+          style={{ paddingLeft: 10 }}
+        />
         <Form
           name="basic"
           id="addAdForm"

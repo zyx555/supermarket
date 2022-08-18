@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import { Button, Checkbox, Form, Input } from 'antd';
-import { Link, Routes, Route, Outlet } from 'react-router-dom'
+import { Button, Checkbox, Form, Input,message } from 'antd';
+import { Link } from 'react-router-dom'
 import HttpUtil from '../../Util/httpUtil';
-
-// import Register from '../Register'
-// import Home from '../Home'
+import Description from './Description'
 import './index.css'
 import 'antd/dist/antd.min.css'
 
@@ -15,7 +13,10 @@ const onFinish = (values) => {
     adminaccount: username,
     adminpwd: password
   }
+  const hideloading = message.loading("请求中")
   HttpUtil.login(data).then((res) => {
+    hideloading()
+    message.success('登录成功')
     localStorage.setItem('token', res.data.token)
     window.location.href = '/home'
   })
@@ -27,12 +28,16 @@ const onFinishFailed = (errorInfo) => {
 export default class Login extends Component {
   render() {
     return (
+      
       <div className='wrapper'>
+        
         <div className='content'>
+        <Description/>
           <Form
             name="basic"
             labelCol={{
               span: 4,
+             
             }}
             wrapperCol={{
               span: 20,
@@ -40,6 +45,7 @@ export default class Login extends Component {
             initialValues={{
               remember: true,
             }}
+         
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"

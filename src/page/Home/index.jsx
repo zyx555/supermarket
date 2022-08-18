@@ -2,10 +2,9 @@ import React, { Component } from 'react'
 import { Layout, Menu } from 'antd';
 import { Link, Outlet } from 'react-router-dom'
 import Nav from './Nav'
-import Users from './Users'
 import 'antd/dist/antd.min.css'
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content,  Sider } = Layout;
 
 const layout = {
     labelCol: { span: 12 },
@@ -37,11 +36,10 @@ const Home = () => {
             <Layout>
                 <Header className="site-layout-sub-header-background" style={{ padding: 0 }} />
                 <Content style={{ margin: '24px 16px 0' }}>
-                    <div className="site-layout-background" style={{ padding: 24, minHeight: 770 }}>
+                    <div className="site-layout-background" style={{ padding: 24, minHeight: 624 }}>
                         <Outlet />
                     </div>
                 </Content>
-                <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
             </Layout>
 
         </Layout>

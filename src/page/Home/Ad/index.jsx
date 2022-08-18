@@ -1,24 +1,10 @@
 import React, { Component } from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import { Space, Table, Button, Image, message, Upload } from 'antd';
+import { Space, Table, Button, Image, message, Upload, Popconfirm } from 'antd';
 import HttpUtil from '../../../Util/httpUtil';
 import Description from './Description'
 import binaryArrToUrl from '../../../Util/binaryArrToUrl';
 
-
-
-function handleDeletAd(id) {
-  HttpUtil.deleteAd({
-    _id: id
-  }).then((res) => {
-    console.log(res)
-    HttpUtil.getAds({
-
-    }).then(() => {
-
-    })
-  })
-}
 export default class Ad extends Component {
   state = {
     pagination: {
@@ -27,7 +13,8 @@ export default class Ad extends Component {
       total: 0
     },
     data: [],
-    adid: ''
+    adid: '',
+    loading: true
   }
 
   props = {
@@ -38,6 +25,23 @@ export default class Ad extends Component {
     maxCount: 1
   }
 
+   handleDeletAd=(id)=> {
+    HttpUtil.deleteAd({
+      _id: id
+    }).then((res) => {
+      console.log(res)
+      HttpUtil.getAds({}).then(() => {
+        message.success('删除成功')
+       HttpUtil.getAds({}).then((res)=>{
+       this.setState({
+          data: res.data,
+          loading: false
+        })
+        console.log(res)
+       })
+      })
+    })
+  }
   customRequest = (data) => {
     console.log(data)
     let formData = new FormData()
@@ -56,7 +60,9 @@ export default class Ad extends Component {
       this.setState({
         data
       })
-      message.success(res.message)
+     
+      message.success('更新图片成功')
+      this.getAds()
     })
   }
 
@@ -64,6 +70,7 @@ export default class Ad extends Component {
     this.setState({
       adid: id
     })
+  
   }
 
   columns = [
@@ -102,11 +109,18 @@ export default class Ad extends Component {
               <Upload
                 {...this.props}
                 customRequest={this.customRequest}
+                showUploadList={false}
               >
                 <Button type="primary" onClick={this.updateAd.bind(data, data._id)}>更改图片</Button>
               </Upload>
-
-              <Button type="primary" danger onClick={handleDeletAd.bind(data, data._id)} >删除广告</Button>
+              <Popconfirm
+                title="确定删除该广告吗"
+                onConfirm={this.handleDeletAd.bind(data, data._id)}
+                okText="确认"
+                cancelText="取消"
+              >
+                <Button type="primary" danger  >删除广告</Button>
+              </Popconfirm >
             </Space>
           </>
         )
@@ -114,24 +128,25 @@ export default class Ad extends Component {
     },
   ];
   componentDidMount() {
-    HttpUtil.getAds({
-
-    }).then((res) => {
-      // const { data } = this.state
+    this.getAds()
+  }
+  getAds=()=>{
+    HttpUtil.getAds({}).then((res) => {
       this.setState({
-        data: res.data
+        data: res.data,
+        loading: false
       })
-      console.log(res)
+
     })
   }
   render() {
-    const { data, pagination } = this.state
+    const { loading, data, pagination } = this.state
 
     return (
       <>
-      <Description/>
+        <Description />
         <Link to='/home/ad/add'><Button type='primary' htmlType="submit" >新增广告</Button></Link>
-        <Table columns={this.columns} dataSource={data} pagination={false} />
+        <Table columns={this.columns} dataSource={data} pagination={false} loading={loading} />
         <Outlet />
       </>
 

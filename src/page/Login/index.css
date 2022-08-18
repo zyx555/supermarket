@@ -7,14 +7,32 @@
     background-image: url(./2.jpg);
      background-repeat:no-repeat; 
      background-size:100%;
-    overflow-y: hidden; 
+     height: 714px;
+     overflow-y: hidden; 
 }
   .content {
-    
-  
-    margin:18.2% auto;
+    margin:14% auto;
     display: flex;
+    width:350px;
     flex-direction: column;
     justify-content: space-evenly;
   }
- 
+.ant-input{
+border-radius: 6px ;
+}
+.ant-input-affix-wrapper{
+  border-radius: 6px ;
+}
+.ant-btn-primary {
+  width:123px;
+  border-radius: 6px;
+}
+.ant-form-item-control-input{
+  width:277px
+}
+.ant-col-offset-7 {
+  margin-left: 17.16666667%;
+}
+.ant-form{
+  margin-left: 0  ;
+}
