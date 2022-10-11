@@ -17,8 +17,6 @@ export default class AddCategory extends Component {
       message.success('商品分类新增成功')
       window.location.href='/home/categories'
     }
-    ).catch(
-      message.error('该分类下还有商品')
     )
   }
   onFinishFailed = (err) => {

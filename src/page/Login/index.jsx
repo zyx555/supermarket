@@ -18,7 +18,7 @@ const onFinish = (values) => {
     hideloading()
     message.success('登录成功')
     localStorage.setItem('token', res.data.token)
-    window.location.href = '/home'
+    window.location.href = '/home/users'
   })
 };
 

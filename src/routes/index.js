@@ -9,6 +9,8 @@ import { Navigate } from "react-router-dom";
 import AddAds from "../page/Home/Ad/AddAds";
 import AddCategory from "../page/Home/Categories/AddCategory";
 import UpdatePsw from "../page/Home/Users/UpdatePsw";
+import CommodityMessage from '../page/Home/CommodityMessage';
+import AddCommodity from '../page/Home/CommodityMessage/AddCommodity'
 
 export default [
   {
@@ -52,6 +54,15 @@ export default [
         path: "/home/ad/add",
         element: <AddAds />,
       },
+      {
+        path:"/home/commodityMessage",
+        element:<CommodityMessage/>
+      },
+      {
+
+        path:"/home/commodityMessage/addCommodity",
+        element:<AddCommodity/>
+      }
     ],
   },
   {

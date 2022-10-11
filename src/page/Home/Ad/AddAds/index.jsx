@@ -18,7 +18,7 @@ const onFinish = (data) => {
     formData.append('adCompany', data.adCompany)
     formData.append('adName', data.adName)
     formData.append('adCategory', data.adCategory)
-    HttpUtil.addAd(formData).then((res) => {
+    HttpUtil.addAd(formData).then((res) => {  
       message.success('新增广告成功')
       window.location.href='/home/ad'
       

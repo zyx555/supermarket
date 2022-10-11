@@ -20,7 +20,7 @@ const { SubMenu } = Menu
 const items = [
     { title: '数据概况', key: '1', icon: <PieChartOutlined />, path: '' },
     { title: '用户信息管理', key: '2', icon: <DesktopOutlined />, path: '/home/users' },
-    { title: '商品信息管理', key: '3', icon: <ContainerOutlined />, path: '' },
+    { title: '商品信息管理', key: '3', icon: <ContainerOutlined />, path: '/home/commodityMessage' },
     { title: '商品分类管理', key: '4', icon: <MailOutlined />, path: '/home/categories' },
     { title: '订单信息管理', key: '5', icon: <AppstoreOutlined />, path: '' },
     { title: '广告投放管理', key: '6', icon: <ContainerOutlined />, path: '/home/ad' },

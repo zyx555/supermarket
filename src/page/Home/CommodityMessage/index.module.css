@@ -1,0 +1,96 @@
+:global .ant-card{
+ width:307px;
+ height:385px;
+}
+:global .site-card-wrapper{
+    width:307px;
+    height:385px;
+    display: inline-flex;
+    justify-content: space-evenly;
+    margin-right: 15px;
+}
+:global .ant-image-img{
+    width: 227px !important;
+    height: 186px;
+}
+.out{
+    width: 1310px;
+    margin-left: -25px;
+}
+:global .ant-card-body{
+    width: 305px;
+    height: 145px;
+    padding: 0 10px!important;
+}
+.detail{
+    width: 305px;
+    height: 145px;
+}
+.commodityName{
+    margin: 10px 0px 0px;
+    font-weight: 900;
+    height: 29px;
+    padding-left: 15px;
+    padding-right: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 18px;
+    text-align: center;
+}
+.detailLeft,.detailRight{
+    width: 140px;
+    height: 90px;
+    padding-left: 10px;
+    display: inline-block;
+    overflow: hidden;
+    margin-top: 10px;
+}
+.updateCommodityLeft,.updateCommodityRight{
+    display: inline-block;
+    width: 140px;
+    height: 90px;
+    padding-left: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+.update{
+    width:1302px
+}
+:global(.update .ant-form){
+    display: inline-flex;
+}
+:global(.update .ant-row) {
+    width: 178px;
+}
+:global(.update .ant-input) {
+    width: 100px;
+}
+:global(.update .ant-form-item-control-input) {
+    width: 110px;
+}
+.bottom{
+    display: flex;
+    justify-content: space-around;
+}
+:global(.wall .ant-input){
+    width: 50px;
+    height: 21px;
+}
+:global(.update .ant-form-item){
+    margin: 0 !important;
+}
+.searchButton{
+    width: 32px !important;
+    border-radius:50%;
+
+}
+.search{
+    width: 32px;
+    height:32px;
+}
+.add{
+    width: 125px;
+    height:32px;
+    margin:-32px 0px 0px 78px;
+}

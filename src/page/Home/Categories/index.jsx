@@ -38,7 +38,6 @@ export default class index extends Component {
   handleDelete = (id) => {
     const { data } = this.state
     const curTotal = data.length
-    console.log(...data)
     
       HttpUtil.deleteCategory({
         _id: id,
@@ -46,10 +45,7 @@ export default class index extends Component {
       }).then(() => {
         message.success('删除成功')
         this.getCategories()
-      
       })
-      
-    
   }
   loadMoreData = () => {
     const { current, pageSize } = this.state.pagination
